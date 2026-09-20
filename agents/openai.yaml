@@ -1,0 +1,6 @@
+interface:
+  display_name: "Creator Development"
+  short_description: "Source and verify creators with evidence"
+  default_prompt: "Use $creator-development to build an evidence-backed creator shortlist."
+policy:
+  allow_implicit_invocation: true
