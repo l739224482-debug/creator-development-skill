@@ -25,5 +25,21 @@ grep -q 'balance_delta' references/source-modes.md
 grep -q 'unavailable' references/source-modes.md
 grep -q 'Never print' references/security.md
 grep -q 'wrong credential type' references/security.md
+test -f references/sourcing-strategy.md
+test -f references/screening-rubric.md
+test -f references/platform-checks.md
+test -f references/output-contract.md
+grep -qi 'competitor' references/sourcing-strategy.md
+grep -qi 'keyword.*review signal' references/screening-rubric.md
+grep -q 'YouTube' references/platform-checks.md
+grep -q 'TikTok' references/platform-checks.md
+grep -q 'Instagram' references/platform-checks.md
+grep -q 'recommended' references/output-contract.md
+grep -q 'review' references/output-contract.md
+grep -q 'rejected' references/output-contract.md
+grep -qi 'platform.*canonical public profile' references/output-contract.md
+grep -q 'mechanically_screened' references/output-contract.md
+grep -q 'contextually_reviewed' references/output-contract.md
+grep -q 'nox_credit_usage' references/output-contract.md
 
 echo "contract validation passed"
