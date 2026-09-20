@@ -180,7 +180,7 @@ The release gate includes Skill structure validation, scenario review, shell che
 
 ## 10. Publishing and Versioning
 
-The local canonical checkout is `/Users/lee/Documents/creator-development-skill`. The intended public GitHub repository is `creator-development-skill`, licensed under MIT. The first release is `v0.1.0`.
+The local checkout location is maintainer-selected. The intended public GitHub repository is `creator-development-skill`, licensed under MIT. The first release is `v0.1.0`.
 
 GitHub is the only editable source of truth. The current GitHub CLI session must be reauthenticated before remote repository creation or push. No publication claim is made until the remote repository and tag are verified.
 

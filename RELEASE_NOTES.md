@@ -1,3 +1,11 @@
+# v0.1.1
+
+Security and validation patch:
+
+- detects quoted as well as unquoted Nox credential assignments in files and ZIP archives;
+- adds forward cases for rejected/wrong credential types, ambiguous skip scope, and documented response-level Credit usage;
+- removes machine-specific paths and limits the release archive to installable Skill files and public documentation.
+
 # v0.1.0
 
 Initial public release of Creator Development.

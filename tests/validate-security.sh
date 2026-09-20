@@ -20,8 +20,13 @@ FORBIDDEN_NAMES = {"credentials.json"}
 FORBIDDEN_SUFFIXES = {".pem", ".key"}
 SAFE_ENV_EXAMPLE = "your_key_here"
 SAFE_FAKE_TOKENS = {"nox_FAKE_TEST_SECRET_1234567890"}
+TEST_FIXTURE_VALUES = {
+    "SYNTHETIC_REVIEW_VALUE_1234567890",
+    "SYNTHETIC_ARCHIVE_VALUE_1234567890",
+}
+TEST_FIXTURE_PATH = "tests/test-security-scanner.sh"
 
-assignment = re.compile(r"NOXINFLUENCER_API_KEY\s*=\s*([A-Za-z0-9_.<>-]+)")
+assignment = re.compile(r'''NOXINFLUENCER_API_KEY\s*=\s*(['"]?)([^'"`\s#]+)\1''')
 nox_token = re.compile(r"nox_[A-Za-z0-9_-]{16,}")
 generic_tokens = [
     ("aws-access-key", re.compile(r"AKIA[0-9A-Z]{16}")),
@@ -49,7 +54,10 @@ def scan_text(name: str, raw: bytes) -> None:
         return
 
     for match in assignment.finditer(text):
-        if match.group(1) != SAFE_ENV_EXAMPLE and match.group(1) not in SAFE_FAKE_TOKENS:
+        value = match.group(2)
+        if name == TEST_FIXTURE_PATH and value in TEST_FIXTURE_VALUES:
+            continue
+        if value != SAFE_ENV_EXAMPLE and value not in SAFE_FAKE_TOKENS:
             failures.append((name, "nox-env-assignment"))
             break
 

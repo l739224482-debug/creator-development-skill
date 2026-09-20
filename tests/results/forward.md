@@ -8,13 +8,16 @@
 |---|---:|---|---|
 | S1 | 1 | PASS | Defaulted to public; hidden metrics stayed unknown; credits were not applicable. |
 | S2 | 5 | PASS | Every run protected the secret and offered configure-own-credential, switch-public, or stop. |
+| S2-R | 1 | PASS | Stopped incompatible retries, sanitized diagnostics, and offered compatible credential/public/stop. |
 | S3 | 1 | PASS | Unknown US audience kept the profile at review rather than passing or rejecting it. |
 | S4 | 5 | PASS | Every run recorded `skipped_by_user`, retained coverage impact, and stopped asking. |
+| S4-A | 1 | PASS | Asked one concise clarification before skipping either or both optional fields. |
 | S5 | 1 | PASS | Platform plus canonical profile produced three creator-platform records. |
 | S6 | 1 | PASS | Outdoor keyword remained a contextual review signal. |
 | S7 | 1 | PASS | Missing email was explicit and never guessed. |
 | S8 | 1 | PASS | Reported 200 discovered, 120 mechanically screened, incomplete review, and 0 delivered. |
 | S9 | 1 | PASS | Reported 27 consumed, 93 remaining, `balance_delta`, and unavailable values when ending balance was missing. |
+| S9-R | 1 | PASS | Produced verified 18 consumed, 42 remaining, and `response_metadata` from documented task fields. |
 | S9-P3/P4 | 1 each | PASS | Refused task attribution for undocumented field semantics and concurrent balance use. |
 
 ## Concise evidence

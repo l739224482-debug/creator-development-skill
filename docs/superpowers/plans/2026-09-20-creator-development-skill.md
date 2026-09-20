@@ -188,7 +188,7 @@ policy:
 
 ```bash
 bash tests/validate-contract.sh
-python3 /Users/lee/.codex/skills/.system/skill-creator/scripts/quick_validate.py .
+python3 "${CODEX_HOME:-$HOME/.codex}/skills/.system/skill-creator/scripts/quick_validate.py" .
 git add SKILL.md agents/openai.yaml tests/validate-contract.sh
 git commit -m "feat: add creator development skill entrypoint"
 ```
@@ -263,7 +263,7 @@ Define record fields; evidence states `verified`, `unknown`, `pending_review`, `
 ```bash
 bash tests/validate-contract.sh
 bash tests/validate-security.sh
-python3 /Users/lee/.codex/skills/.system/skill-creator/scripts/quick_validate.py .
+python3 "${CODEX_HOME:-$HOME/.codex}/skills/.system/skill-creator/scripts/quick_validate.py" .
 git add references tests/validate-contract.sh
 git commit -m "docs: add creator sourcing and review contracts"
 ```
@@ -336,7 +336,7 @@ For a failure, edit the narrowest applicable instruction, then rerun that scenar
 bash tests/test-security-scanner.sh
 bash tests/validate-security.sh
 bash tests/validate-contract.sh
-python3 /Users/lee/.codex/skills/.system/skill-creator/scripts/quick_validate.py .
+python3 "${CODEX_HOME:-$HOME/.codex}/skills/.system/skill-creator/scripts/quick_validate.py" .
 git diff --check
 git add SKILL.md references tests/results/forward.md
 git commit -m "test: verify creator skill behavior"
@@ -400,7 +400,7 @@ Read back both NAS Markdown files. Download the NAS ZIP and checksum to a fresh 
 bash tests/test-security-scanner.sh
 bash tests/validate-security.sh
 bash tests/validate-contract.sh
-python3 /Users/lee/.codex/skills/.system/skill-creator/scripts/quick_validate.py .
+python3 "${CODEX_HOME:-$HOME/.codex}/skills/.system/skill-creator/scripts/quick_validate.py" .
 git status --short --branch
 git log --oneline --decorate -8
 ```
