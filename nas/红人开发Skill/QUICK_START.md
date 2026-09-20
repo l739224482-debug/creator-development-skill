@@ -18,4 +18,4 @@
 
 ## 安装
 
-从 GitHub 仓库或 `releases/v0.1.0/` 下载稳定包，将其中 `creator-development` 文件夹放入 Agent 的 skills 目录，然后调用 `$creator-development`。
+从 GitHub 仓库或 `releases/v0.1.1/` 下载稳定包，将其中 `creator-development` 文件夹放入 Agent 的 skills 目录，然后调用 `$creator-development`。
