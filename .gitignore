@@ -1,1 +1,10 @@
 .worktrees/
+.DS_Store
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+credentials.json
+dist/
+tests/results/forward-raw/
