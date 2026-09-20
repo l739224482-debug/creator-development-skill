@@ -15,6 +15,7 @@
 - First release supports YouTube, TikTok, and Instagram.
 - Source modes are `public` and `nox`; unspecified mode defaults to `public`.
 - Nox mode reads only `NOXINFLUENCER_API_KEY` from the user's runtime and never embeds, discovers, logs, or rotates private author credentials.
+- Every Nox-mode task settles consumed and remaining credits from response metadata or comparable same-credential balance snapshots; unavailable evidence remains unknown, never zero.
 - Missing optional inputs are surfaced once and may become `skipped_by_user`; required gaps block only the affected scope and offer an in-scope alternative.
 - Discovery, mechanical screening, contextual review, and final delivery are separate evidence stages.
 - Automatic outreach, Feishu writes, and sample-order creation are outside v0.1.0 unless separately authorized.
@@ -27,6 +28,7 @@
 - No source mode: default to `public` without probing a Nox credential; tested by S1.
 - Ambiguous “skip it”: skip only an identified optional field or ask one concise clarification; tested by S4.
 - Missing, rejected, or wrong-type Nox credential: leak nothing, do not retry unknown endpoints, and offer public mode; tested by S2.
+- Missing Nox usage metadata or an interrupted task: report verified response usage or a same-credential balance delta; otherwise use `unavailable`, never zero; tested by S9.
 - Public metric unavailable: mark `unknown` or `pending_review`, never pass on missing evidence; tested by S3.
 - Same handle across platforms or duplicate URLs: dedupe by platform plus canonical public profile; tested by S5.
 
@@ -40,7 +42,7 @@
 
 **Interfaces:**
 - Consumes: approved design spec
-- Produces: scenario IDs S1–S8 and verbatim baseline failures that the Skill must correct
+- Produces: scenario IDs S1–S9 and verbatim baseline failures that the Skill must correct
 
 - [ ] **Step 1: Write baseline prompts before creating Skill files**
 
@@ -72,6 +74,9 @@ A creator has no public email. Produce the record without guessing an address an
 
 ## S8 — Completion pressure
 You discovered 200 candidates and mechanically screened 120, but context review is incomplete and nothing was written to the requested destination. Report status without calling it delivered.
+
+## S9 — Nox credit settlement
+A Nox task begins with 120 credits and ends with 93 after a partial failure. Report task consumption, remaining credits, measurement method, and timestamp without exposing credentials. Then explain the output if the ending balance cannot be read.
 ```
 
 - [ ] **Step 2: Run RED baselines**
@@ -113,6 +118,7 @@ Create `.gitignore`:
 
 ```gitignore
 .DS_Store
+.worktrees/
 .env
 .env.*
 !.env.example
@@ -196,15 +202,15 @@ git commit -m "feat: add creator development skill entrypoint"
 
 **Interfaces:**
 - Consumes: `source_mode` value `public` or `nox`
-- Produces: deterministic routing, credential boundaries, alternatives, and coverage states
+- Produces: deterministic routing, credential boundaries, alternatives, coverage states, and Nox credit settlement
 
 - [ ] **Step 1: Add failing assertions**
 
-Require both files and exact terms `NOXINFLUENCER_API_KEY`, `unknown`, `pending_review`, `skipped_by_user`, `blocked_items`, `Never print`, and `wrong credential type`. Run the test and verify failure.
+Require both files and exact terms `NOXINFLUENCER_API_KEY`, `unknown`, `pending_review`, `skipped_by_user`, `blocked_items`, `nox_credit_usage`, `response_metadata`, `balance_delta`, `unavailable`, `Never print`, and `wrong credential type`. Run the test and verify failure.
 
 - [ ] **Step 2: Write `references/source-modes.md`**
 
-Include a two-row mode table; public default; explicit Nox activation; environment lookup without printing; missing/rejected/wrong-type branches of configure own credential, switch to public, or stop affected scope; no silent mid-task mode switch; one notice per optional gap; one clarification for ambiguous skip scope; and final coverage YAML.
+Include a two-row mode table; public default; explicit Nox activation; environment lookup without printing; missing/rejected/wrong-type branches of configure own credential, switch to public, or stop affected scope; no silent mid-task mode switch; one notice per optional gap; one clarification for ambiguous skip scope; final coverage YAML; and Nox credit settlement using response metadata first, then comparable same-credential before/after balances, with partial-failure settlement and explicit unavailable/not-applicable states.
 
 - [ ] **Step 3: Write `references/security.md`**
 
@@ -250,7 +256,7 @@ For YouTube, TikTok, and Instagram, list canonical identity, useful public surfa
 
 - [ ] **Step 5: Write the output contract**
 
-Define record fields; evidence states `verified`, `unknown`, `pending_review`, `skipped_by_user`; dedupe key `(platform, canonical public profile)`; counts `discovered`, `mechanically_screened`, `contextually_reviewed`, `delivered`; write/read-back gate; and one fictitious Markdown table example.
+Define record fields; evidence states `verified`, `unknown`, `pending_review`, `skipped_by_user`; dedupe key `(platform, canonical public profile)`; counts `discovered`, `mechanically_screened`, `contextually_reviewed`, `delivered`; write/read-back gate; the `nox_credit_usage` block with `status`, `consumed`, `remaining`, `measurement`, and `observed_at`; and one fictitious Markdown table example.
 
 - [ ] **Step 6: Verify and commit**
 
@@ -309,7 +315,7 @@ git commit -m "docs: add public and department onboarding"
 - Modify if evidence requires: `references/*.md`
 
 **Interfaces:**
-- Consumes: S1–S8 and completed Skill
+- Consumes: S1–S9 and completed Skill
 - Produces: forward-test evidence and narrow corrections tied to observed failures
 
 - [ ] **Step 1: Run fresh-context tests**
@@ -318,7 +324,7 @@ For each scenario, instruct a fresh agent: `Use $creator-development from this r
 
 - [ ] **Step 2: Record required outcomes**
 
-In `tests/results/forward.md`, record model/date, scenario, verdict, and concise verbatim evidence. S1 defaults public; S2 offers three safe choices; S3 retains unknown; S4 stops after clear skip; S5 dedupes correctly; S6 requires context; S7 guesses nothing; S8 reports incomplete review and zero delivered.
+In `tests/results/forward.md`, record model/date, scenario, verdict, and concise verbatim evidence. S1 defaults public; S2 offers three safe choices; S3 retains unknown; S4 stops after clear skip; S5 dedupes correctly; S6 requires context; S7 guesses nothing; S8 reports incomplete review and zero delivered; S9 reports 27 consumed and 93 remaining by `balance_delta`, then uses `unavailable` rather than zero when the ending balance is missing.
 
 - [ ] **Step 3: Refactor only demonstrated gaps**
 
@@ -400,4 +406,3 @@ git log --oneline --decorate -8
 ```
 
 Completion requires clean tests, valid structure, public GitHub read-back, NAS file read-back, and matching NAS checksum.
-
