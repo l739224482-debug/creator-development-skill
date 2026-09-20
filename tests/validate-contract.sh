@@ -41,5 +41,21 @@ grep -qi 'platform.*canonical public profile' references/output-contract.md
 grep -q 'mechanically_screened' references/output-contract.md
 grep -q 'contextually_reviewed' references/output-contract.md
 grep -q 'nox_credit_usage' references/output-contract.md
+test -f README.md
+test -f LICENSE
+test -f 'nas/AI工具-README.md'
+test -f 'nas/红人开发Skill/README.md'
+test -f 'nas/红人开发Skill/QUICK_START.md'
+grep -qi 'public' README.md
+grep -qi 'nox' README.md
+grep -qi 'input' README.md
+grep -qi 'output' README.md
+grep -qi 'limit' README.md
+grep -q 'creator-development-skill' README.md
+grep -q '红人开发Skill' 'nas/AI工具-README.md'
+if grep -R -q 'NOXINFLUENCER_API_KEY=' nas; then
+  echo 'NAS docs must not contain credential assignments' >&2
+  exit 1
+fi
 
 echo "contract validation passed"
