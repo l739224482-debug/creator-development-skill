@@ -44,3 +44,7 @@ Do not infer emails or hidden metrics. Do not send outreach, write external syst
 - Stage counts close against the delivered records.
 - Nox credit status is included when applicable.
 - External delivery is claimed only after write and read-back evidence.
+
+## Optional team Nox tools
+
+For an authorized Nox task with the team tools installed, read [the workflow](team_bundle/WORKFLOW.md) and [setup](team_bundle/README.md). Use the budget ledger for paid calls; unknown usage blocks retries. The example brief is project-specific, not a universal screening rule. Credentials are imported into each coworker's OS secret store from a separately authorized encrypted handoff; never include actual credentials in this skill or Git.

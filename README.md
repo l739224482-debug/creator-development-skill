@@ -42,3 +42,7 @@ GitHub is the canonical editable source for `creator-development-skill`. The dep
 ## License
 
 MIT
+
+## 团队Nox工具包
+
+已授权Nox模式的同事，可使用 [team_bundle/README.md](team_bundle/README.md) 与 [team_bundle/WORKFLOW.md](team_bundle/WORKFLOW.md)。工具支持本轮独立预算、正式服务只读调用、公开视频指标与口播证据。加密凭证文件由负责人单独交接，不进入此仓库。

@@ -1,0 +1,7 @@
+.venv/
+node_modules
+runs/
+*.enc
+*.key
+.env
+__pycache__/

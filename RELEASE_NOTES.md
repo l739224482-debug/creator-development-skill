@@ -29,3 +29,7 @@ No runtime credential, account identifier, private proxy, provider cache, or int
 - Public sources cannot verify hidden audience or private performance metrics.
 - Credit usage is reported as unavailable when response-field semantics, isolated snapshots, or remaining balance cannot be verified.
 - Outreach, Feishu writes, and sample-order creation require separate authorization.
+
+## Team Nox tools v1.0.0 (2026-10-12)
+
+Adds a portable, budgeted read-only official CLI wrapper, public TikTok metrics and audio-evidence helpers, encrypted credential import to each coworker's macOS Keychain, a configurable example brief and team setup instructions. Generic creator-development Skill remains v0.1.1. Real credential handoff artifacts are encrypted, distributed separately and excluded from Git/public releases.
